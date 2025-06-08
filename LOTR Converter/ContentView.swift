@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showExchangeInfo = false
+    @State var silverAmount = ""
+    @State var goldAmount = ""
+    
     var body: some View {
         ZStack {
             // background image
@@ -45,7 +49,11 @@ struct ContentView: View {
                                 .foregroundStyle(.white)
                                 
                         }
+                        .padding(.bottom, -5)
+                        
                         // text field
+                        TextField("Amount", text: $silverAmount)
+                            .textFieldStyle(.roundedBorder)
                     }
                     // equal sign
                     Image(systemName: "equal")
@@ -68,20 +76,33 @@ struct ContentView: View {
                                 .scaledToFit()
                                 .frame(height: 33)
                         }
-                        // text field
+                        .padding(.bottom, -5)
                         
+                        // text field
+                        TextField("Amount", text: $goldAmount)
+                            .textFieldStyle(.roundedBorder)
+                            .multilineTextAlignment(.trailing)
                     }
                 }
+                .padding()
+                .background(Color.black.opacity(0.5))
+                .clipShape(.capsule)
+                
                 Spacer()
                 
                 // info button
-                Button {
+                HStack {
+                    Spacer()
                     
-                } label: {
-                    Image(systemName: "info.circle.fill")
-                        .font(.largeTitle)
-                        .foregroundStyle(.white)
+                    Button {
+                        showExchangeInfo.toggle()
+                    } label: {
+                        Image(systemName: "info.circle.fill")
+                            .font(.largeTitle)
+                            .foregroundStyle(.white)
+                    }
                 }
+                .padding(.trailing)
             }
         }
     }
